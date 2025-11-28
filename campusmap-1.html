@@ -1,0 +1,91 @@
+<html>
+<head>
+  <title>Campus Map</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: Georgia, serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Top logo bar */
+    .topbar {
+      background-color: black;
+      display: flex;
+      align-items: center;
+      padding: 8px 20px;
+      color: white;
+    }
+
+    .topbar img {
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+    }
+
+    .title {
+      font-size: 32px;
+      margin-top: 60px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      background-color: #f1f1f1;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #ddd;
+    }
+
+    .btn::after {
+      content: " →";
+      font-weight: bold;
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 40px 60px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .bottom img {
+      width: 180px;
+      border-radius: 10px;
+    }
+
+    .contact {
+      text-align: right;
+      font-size: 15px;
+    }
+  </style>
+</head>
+
+<body>
+	<div class="topbar">
+    <img src="logocamp.jpg" alt="Campus Map Logo">
+    <b>Campus Map</b>
+  </div>
+  <h1 class="title">Campus Map</h1>
+  <a href="campusmap-2.html"><button class="btn">Get Started</button></a>
+  <div class="bottom">
+    <img src="logocamp.jpg" alt="College Image">
+    <div class="contact">
+      <p>For further details contact :</p>
+      <p><b>80975-46023</b></p>
+    </div>
+  </div>
+</body>
+</html>

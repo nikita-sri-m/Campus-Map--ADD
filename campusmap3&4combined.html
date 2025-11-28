@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Campus Map</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Georgia", serif;
+      background-color: #ffffff;
+    }
+
+    /* ---------- LIST PAGE (IMAGE 2 LAYOUT) ---------- */
+
+    #listPage {
+      min-height: 100vh;
+      position: relative;
+      padding-top: 60px;
+    }
+
+    .cards-container {
+      width: 70%;
+      margin: 0 auto 60px auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(320px, 1fr));
+      grid-column-gap: 120px;
+      grid-row-gap: 40px;
+    }
+
+    .place-card {
+      display: flex;
+      align-items: center;
+      border: 1px solid #e0e0e0;
+      border-radius: 24px;
+      padding: 18px 30px;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      cursor: pointer;           /* only cursor, NO hover styles */
+    }
+
+    .place-card img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 24px;
+    }
+
+    .place-name {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .next-btn {
+      position: absolute;
+      top: 70px;
+      right: 180px;
+      padding: 6px 16px;
+      border-radius: 4px;
+      border: 1px solid #999;
+      background-color: #ffffff;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    /* ---------- DETAILS PAGE (IMAGE 1 LAYOUT) ---------- */
+
+    #detailPage {
+      display: none;
+      padding: 40px 80px;
+    }
+
+    .detail-photo {
+      width: 160px;
+      height: 105px;
+      object-fit: cover;
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+
+    .detail-card {
+      width: 640px;
+      min-height: 300px;
+      background-color: #f4f4f4;
+      border-radius: 24px;
+      padding: 50px 40px;
+      box-sizing: border-box;
+    }
+
+    .detail-row {
+      font-size: 22px;
+      margin-bottom: 26px;
+    }
+
+    .detail-label {
+      font-weight: bold;
+    }
+
+    .way-container {
+      margin-top: 26px;
+      margin-left: 430px; /* pushes Way to → to the right like screenshot */
+    }
+
+    .way-btn {
+      padding: 10px 28px;
+      border-radius: 10px;
+      border: 1px solid #c7c7c7;
+      background-color: #ffffff;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ LIST PAGE ============ -->
+  <div id="listPage">
+    <button class="next-btn" onclick="showDetails('medical')">Next →</button>
+
+    <div class="cards-container">
+      <div class="place-card" onclick="showDetails('medical')">
+        <img src="C:\Users\Jan20\Desktop\CampusMap\campus\medical.jpeg.jpg" alt="Medical Centre">
+        <div class="place-name">Medical Centre</div>
+      </div>
+
+      <div class="place-card" onclick="showDetails('iot')">
+        <img src="IoT-lab.jpeg.jpg" alt="IOT Lab">
+        <div class="place-name">IOT Lab</div>
+      </div>
+
+      <div class="place-card" onclick="showDetails('amenity')">
+        <img src="C:\Users\Jan20\Desktop\CampusMap\campus\IoT-lab.jpeg.jpg" alt="Amenity Centre">
+        <div class="place-name">Amenity Centre</div>
+      </div>
+
+      <div class="place-card" onclick="showDetails('ignite')">
+        <img src="C:\Users\Jan20\Desktop\CampusMap\campus\Ignite.jpg" alt="Ignite">
+        <div class="place-name">Ignite</div>
+      </div>
+
+      <div class="place-card" onclick="showDetails('ncc')">
+        <img src="C:\Users\Jan20\Desktop\CampusMap\campus\ncc.png" alt="NCC & NSS Block">
+        <div class="place-name">NCC & NSS Block</div>
+      </div>
+
+      <div class="place-card" onclick="showDetails('aids')">
+        <img src="aids.png" alt="AI&DS Block">
+        <div class="place-name">AI&DS Block</div>
+      </div>
+
+      <div class="place-card" onclick="showDetails('hostel')">
+        <img src="hostel.png" alt="Hostel (Boys/Girls)">
+        <div class="place-name">Hostel (Boys/Girls)</div>
+      </div>
+
+      <div class="place-card" onclick="showDetails('makerspace')">
+        <img src="makers.png" alt="Makerspace">
+        <div class="place-name">Makerspace</div>
+      </div>
+
+      <div class="place-card" onclick="showDetails('library')">
+        <img src="library.png" alt="Library">
+        <div class="place-name">Library</div>
+      </div>
+
+      <div class="place-card" onclick="showDetails('code')">
+        <img src="code-studio.png" alt="Code Studio">
+        <div class="place-name">Code Studio</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ DETAILS PAGE ============ -->
+  <div id="detailPage">
+    <img id="detailImg" class="detail-photo" src="" alt="Place photo">
+
+    <div class="detail-card">
+      <div class="detail-row">
+        <span class="detail-label">Name : </span>
+        <span id="detailName"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Distance : </span>
+        <span id="detailDistance"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Location : </span>
+        <span id="detailLocation"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Description : </span>
+        <span id="detailDescription"></span>
+      </div>
+    </div>
+
+    <div class="way-container">
+        <a href="campusmap-5.html"><button class="btn">Next →</button></a>
+    </div>
+  </div>
+
+  <script>
+    // -------- DATA FOR EACH PLACE (EDIT TEXTS AS YOU LIKE) ----------
+    const placeData = {
+      medical: {
+        img: "medical.jpeg.jpg",
+        name: "Medical Centre",
+        distance: "200 m from Main Gate",
+        location: "Below NSS and NCC Block",
+        description: "Provides first aid and basic medical facilities for students and staff."
+      },
+      iot: {
+        img: "IoT-lab.jpeg.jpg",
+        name: "IOT Lab",
+        distance: "150 m from CCE Department",
+        location: "Ground Floor",
+        description: "Lab for Internet of Things experiments and projects."
+      },
+      amenity: {
+        img: "Aminity-Centre.jpeg.jpg",
+        name: "Amenity Centre",
+        distance: "100 m from Central Block",
+        location: "Near Canteen Area",
+        description: "Food court and refreshment zone for students."
+      },
+      ignite: {
+        img: "Ignite.jpg",
+        name: "Ignite",
+        distance: "Inside Academic Block",
+        location: "Ground Floor",
+        description: "Collaborative space for learning and discussion."
+      },
+      ncc: {
+        img: "ncc.png",
+        name: "NCC & NSS Block",
+        distance: "300 m from Main Ground",
+        location: "Back side of the campus",
+        description: "Office and training rooms for NCC and NSS activities."
+      },
+      aids: {
+        img: "aids.png",
+        name: "AI&DS Block",
+        distance: "200m from Mech department",
+        location: "Near Mech Department",
+        description: "Department building for Artificial Intelligence and Data Science."
+      },
+      hostel: {
+        img: "hostel.png",
+        name: "Hostel (Boys/Girls)",
+        distance: "400 m from Main Building",
+        location: "Hostel Zone",
+        description: "Residential blocks for boys and girls with all basic facilities."
+      },
+      makerspace: {
+        img: "makers.png",
+        name: "Makerspace",
+        distance: "Close to Workshop",
+        location: "Innovation Centre",
+        description: "Prototyping lab with tools for building and experimenting."
+      },
+      library: {
+        img: "library.png",
+        name: "Library",
+        distance: "200 m from Admin Block",
+        location: "Central Academic Zone",
+        description: "Main library with books, journals and digital resources."
+      },
+      code: {
+        img: "code-studio.png",
+        name: "Code Studio",
+        distance: "Inside CCE Block",
+        location: "Second Floor",
+        description: "Programming lab for software development and coding practice."
+      }
+    };
+
+    // --------- FUNCTIONS ----------
+    function showDetails(id) {
+      const data = placeData[id];
+      if (!data) return;
+
+      document.getElementById("detailImg").src = data.img;
+      document.getElementById("detailName").textContent = data.name;
+      document.getElementById("detailDistance").textContent = data.distance;
+      document.getElementById("detailLocation").textContent = data.location;
+      document.getElementById("detailDescription").textContent = data.description;
+
+      document.getElementById("listPage").style.display = "none";
+      document.getElementById("detailPage").style.display = "block";
+    }
+  </script>
+</body>
+</html>
